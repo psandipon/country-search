@@ -1,22 +1,22 @@
 // import { reject, resolve } from "core-js/fn/promise"
 
- const state = () => {
-  allCountries: [];
-};
+export const state = () => ({
+  allCountries: []
+});
 
- const getters = {
+export const getters = {
   GET_ALL_COUNTRY: state => {
     return state.allCountries;
   }
 };
 
- const mutations = {
+const mutations = {
   SET_ALL_COUNTRY(state, data) {
     state.allCountries = data;
   }
 };
 
- const actions = {
+const actions = {
   FETCH_ALL_COUNTRY_DATA({ commit }, searchParam) {
     // console.log("searchParam:~>", searchParam);
     return new Promise((resolve, reject) => {
@@ -25,9 +25,9 @@
           params: searchParam
         })
         .then(function(response) {
-            console.log(response)
-        //   commit("SET_ALL_COUNTRY", response);
-          resolve(response)
+          // console.log(response);
+          commit("SET_ALL_COUNTRY", response);
+          resolve(response);
         })
         .catch(function(error) {
           //   reject(error);

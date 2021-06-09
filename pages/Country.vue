@@ -7,9 +7,8 @@
       v-model="search"
       prepend-inner-icon="mdi-magnify"
     ></v-text-field>
-    <v-btn @click="FETCH_ALL_COUNTRY_DATA"> Search </v-btn>
-
-    -- --- {{ allCountries }} ---
+    <v-btn @click="fetchCountry"> Search </v-btn>
+    <div v-if="load">{{ GET_ALL_COUNTRY }}</div>
   </div>
 </template>
 
@@ -19,22 +18,18 @@ export default {
   data() {
     return {
       search: "",
-      allCountries: []
+      allCountries: [],
+      load: true
     };
   },
-  mounted() {
-    // this.FETCH_ALL_COUNTRY_DATA();
-  },
+
   computed: {
     ...mapGetters("module/country", ["GET_ALL_COUNTRY"])
   },
   methods: {
     ...mapActions("module/country", ["FETCH_ALL_COUNTRY_DATA"]),
     fetchCountry() {
-      this.FETCH_ALL_COUNTRY_DATA().then(res => {
-        console.log(">>>.", res);
-        this.allCountries = res;
-      });
+      this.FETCH_ALL_COUNTRY_DATA().then(res => {});
     }
   }
 };
